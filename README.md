@@ -1,72 +1,62 @@
-# Getting Started with Create React App
+Overview
+This project is an admin panel built with Nest.js and React for managing credentials, resources, and wallets in a cryptocurrency and Web3 environment. It emphasizes security through encryption and offers robust management features for crypto-related resources.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+Credentials Management:
+Secure storage and management of credentials with encryption using private key-based hashing and salting.
+Resource Management:
+Store, delete, and manage various crypto-related resources such as API keys and contract addresses.
+Share resources securely with other users.
+Wallet Integration:
+Manage multiple cryptocurrency wallets, including private keys and seed phrases.
+User Access Control:
+Role-based access control for secure collaboration.
+Security
+All credentials are encrypted using private key-based hashing with salt to protect against breaches.
+Role-based access ensures that only authorized users can access or modify sensitive information.
+Installation
+Clone the repository:
 
-## Available Scripts
+bash
+Copy code
+git clone https://github.com/your-repo/crypto-admin-panel.git
+cd crypto-admin-panel
+Install server dependencies:
 
-In the project directory, you can run:
+bash
+Copy code
+cd server
+npm install
+Install client dependencies:
 
-### `npm start`
+bash
+Copy code
+cd ../client
+npm install
+Set up environment variables:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Create a .env file in the server directory and set up the necessary environment variables for database connection, encryption keys, etc.
+Run the server:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+bash
+Copy code
+cd server
+npm run start
+Run the client:
 
-### `npm test`
+bash
+Copy code
+cd ../client
+npm start
+Usage
+Access the admin panel at http://localhost:3000.
+Use the panel to manage credentials, resources, and wallets securely.
+Contributing
+Contributions are welcome! Please submit a pull request or open an issue for any feature requests or bugs.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+License
+This project is licensed under the MIT License.
 
-### `npm run build`
+Contact
+For questions or support, please contact medynskyypavlo@gmail.com.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# digio
-# digio
