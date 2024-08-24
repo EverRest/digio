@@ -1,0 +1,12 @@
+export const NODE_ENV = process.env.NODE_ENV;
+export const REACT_APP_SERVER_URL = process.env.REACT_APP_SERVER_URL;
+export const REACT_APP_ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT;
+export const REACT_APP_SOCKET_SERVER = process.env.REACT_APP_SOCKET_SERVER;
+export const REACT_APP_TAWK_PROPERTY_ID =
+  process.env.REACT_APP_TAWK_PROPERTY_ID;
+export const REACT_APP_TAWK_WIDGET_ID = process.env.REACT_APP_TAWK_WIDGET_ID;
+export const REACT_APP_TAWK_BASE_PATH = process.env.REACT_APP_TAWK_BASE_PATH;
+export const REACT_APP_GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+export const FIN_API_TARGET_ENVIRONMENT =
+  process.env.REACT_APP_FIN_API_TARGET_ENVIRONMENT;
+export const FIN_API_TARGET_URL = process.env.REACT_APP_FIN_API_TARGET_URL;

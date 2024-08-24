@@ -1,0 +1,158 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  AWS_REGISTRY: 126684588004.dkr.ecr.eu-central-1.amazonaws.com
+  MICROSERVICE: intranet-admin-ui
+  IMAGE_TAG: $CI_COMMIT_SHORT_SHA-$CI_PIPELINE_IID
+  # Kaniko
+  CACHE_NAME: cache
+  CACHE_TTL: 72h #2 weeks by default#
+
+# Gitlab Anchors
+.kaniko-prerequisite: &kaniko-prerequisite
+  - /busybox/mkdir -p /root/.aws
+  - /busybox/echo $KANIKO_CREDENTIALS | base64 -d > /root/.aws/credentials
+  - /busybox/echo "{\"credHelpers\":{\"$AWS_REGISTRY\":\"ecr-login\"}}" > /kaniko/.docker/config.json
+
+.kaniko-build: &kaniko-build
+  - |
+    /kaniko/executor --context $CI_PROJECT_DIR \
+      --dockerfile $CI_PROJECT_DIR/Dockerfile \
+      --destination $AWS_REGISTRY/$MICROSERVICE:$IMAGE_TAG \
+      --cache=true \
+      --cache-repo $AWS_REGISTRY/$CACHE_NAME \
+      --cache-ttl $CACHE_TTL
+
+.k8s-prerequisite: &k8s-prerequisite
+  - export AWS_DEFAULT_REGION=$AWS_DEFAULT_REGION
+  - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+  - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+  - aws eks update-kubeconfig --name $CLUSTER --region $AWS_DEFAULT_REGION
+
+.k8s-deploy: &k8s-deploy
+  - echo "IMAGE TAGE IS $IMAGE_TAG"
+  - kubectl add secret docker-registry ecr-creds --docker-server=$AWS_REGISTRY --docker-username=AWS --docker-password=$(aws ecr get-login-password --region $AWS_DEFAULT_REGION) --namespace=$NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
+  - sed -i 's/<VERSION>/'$IMAGE_TAG'/g' $CI_PROJECT_DIR/devops/$MANIFEST
+  - kubectl apply -f $CI_PROJECT_DIR/devops/$MANIFEST
+  - kubectl -n $NAMESPACE rollout status deployment $DEPLOYMENT
+
+##### Block to build and deploy to EKS #####
+build-dev:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.11.0-debug
+    entrypoint: [""]
+  before_script:
+    - echo $ENV_FILE_DEV | base64 -d > $CI_PROJECT_DIR/.env
+    - *kaniko-prerequisite
+  script:
+    - *kaniko-build
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - $CI_PROJECT_DIR/node_modules/
+  interruptible: true
+  only:
+    - master
+  tags:
+    - kubernetes-admin-ui-arm
+
+deploy_to_dev:
+  stage: deploy
+  image: 126684588004.dkr.ecr.eu-central-1.amazonaws.com/custom-images:alpine-k8s
+  variables:
+    CLUSTER: "nonprod-eks-cluster"
+    DEPLOYMENT: "intranet-admin-ui"
+    NAMESPACE: "dev"
+    MANIFEST: "intranet-admin-ui-dev.yml"
+    DEPLOY_ENV: "DEV"
+  before_script:
+    - *k8s-prerequisite
+  script:
+    - *k8s-deploy
+  only:
+    - master
+  needs: [build-dev]
+  tags:
+    - kubernetes-admin-ui-arm
+
+build-stage:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.11.0-debug
+    entrypoint: [""]
+  before_script:
+    - echo $ENV_FILE_STAGE | base64 -d > $CI_PROJECT_DIR/.env
+    - *kaniko-prerequisite
+  script:
+    - *kaniko-build
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - $CI_PROJECT_DIR/node_modules/
+  interruptible: true
+  only:
+    - master
+  when: manual
+  tags:
+    - kubernetes-admin-ui-arm
+
+deploy_to_stage:
+  stage: deploy
+  image: 126684588004.dkr.ecr.eu-central-1.amazonaws.com/custom-images:alpine-k8s
+  variables:
+    CLUSTER: "nonprod-eks-cluster"
+    DEPLOYMENT: "intranet-ui"
+    NAMESPACE: "stage"
+    MANIFEST: "intranet-admin-ui-stage.yml"
+  before_script:
+    - *k8s-prerequisite
+  script:
+    - *k8s-deploy
+  only:
+    - master
+  needs: [build-stage]
+  tags:
+    - kubernetes-admin-ui-arm
+
+build-prod:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.11.0-debug
+    entrypoint: [""]
+  before_script:
+    - echo $ENV_FILE_PROD | base64 -d > $CI_PROJECT_DIR/.env
+    - *kaniko-prerequisite
+  script:
+    - *kaniko-build
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - $CI_PROJECT_DIR/node_modules/
+  interruptible: true
+  only:
+    - master
+  when: manual
+  tags:
+    - kubernetes-admin-ui-arm
+
+deploy_to_prod:
+  stage: deploy
+  image: 126684588004.dkr.ecr.eu-central-1.amazonaws.com/custom-images:alpine-k8s
+  variables:
+    CLUSTER: "prod-eks-cluster"
+    DEPLOYMENT: "intranet-admin-ui"
+    NAMESPACE: "prod"
+    MANIFEST: "intranet-admin-ui-prod.yml"
+  before_script:
+    - *k8s-prerequisite
+  script:
+    - *k8s-deploy
+  only:
+    - master
+  needs: [build-prod]
+  tags:
+    - kubernetes-admin-ui-arm
+#### End of EKS block #####

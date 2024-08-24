@@ -1,0 +1,69 @@
+:root {
+  --app-ck-dark-border-color: #9e9e9e;
+  --app-ck-dark-bg: #1b2635;
+  --app-ck-dark-color: #e0e0e0;
+  --app-ck-dark-drop-shadow: rgb(255 255 255) 0px 0px 0px 0px,
+    rgb(0 0 0 / 2%) 0px 0px 0px 1px, rgb(0 0 0 / 25%) 0px 15px 55px 10px,
+    rgb(0 0 0 / 25%) 0px 4px 6px -2px !important;
+  --app-ck-dark-ck-on: #3c4d6e;
+  --app-ck-dark-button-hover: #2c3850;
+}
+
+.ckeditor-dark-wrapper > .ck-editor .ck-content {
+  background: var(--app-ck-dark-bg) !important;
+}
+
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar {
+  background: var(--app-ck-dark-bg);
+  border-color: var(--app-ck-dark-border-color);
+}
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar .ck-dropdown__button:hover {
+  background: var(--app-ck-dark-bg);
+  border-color: var(--app-ck-dark-border-color);
+}
+.ckeditor-dark-wrapper > .ck.ck-dropdown__panel {
+  box-shadow: var(--app-ck-dark-drop-shadow);
+}
+.ckeditor-dark-wrapper > .ck.ck-list__item .ck-button.ck-on {
+  background: var(--app-ck-dark-ck-on);
+}
+.ckeditor-dark-wrapper > .ck.ck-button.ck-on,
+a.ck.ck-button.ck-on {
+  background: var(--app-ck-dark-bg);
+}
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar .ck-list {
+  background: var(--app-ck-dark-bg);
+}
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar .ck-button:hover {
+  background: var(--app-ck-dark-button-hover);
+}
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar svg {
+  color: var(--app-ck-dark-color);
+}
+.ckeditor-dark-wrapper > .ck-editor .ck-toolbar .ck-button__label {
+  color: var(--app-ck-dark-color);
+}
+.ckeditor-dark-wrapper
+  > .ck-rounded-corners
+  .ck.ck-editor__top
+  .ck-sticky-panel
+  .ck-toolbar,
+.ck.ck-editor__top .ck-sticky-panel .ck-toolbar.ck-rounded-corners {
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.ckeditor-dark-wrapper
+  > .ck.ck-editor__main
+  > .ck-editor__editable:not(.ck-focused) {
+  border-color: var(--app-ck-dark-border-color);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.ck.ck-balloon-panel.ck-balloon-panel_caret_se {
+  z-index: 10001;
+}
+
+.ck-rounded-corners .ck.ck-balloon-panel,
+.ck.ck-balloon-panel.ck-rounded-corners {
+  z-index: 10055 !important;
+}

@@ -1,0 +1,16 @@
+export default {
+  all: "All",
+  openComments: "Open comments",
+  done: "Done",
+  property: "Property",
+  user: "User",
+  comment: "Comment",
+  open: "Open",
+  openOrDone: "Open/Done",
+  date: "Date",
+  link: "Link",
+  name: "Name",
+  count: "Count",
+  more: "More",
+  less: "Less",
+};

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  server:
+    restart: always
+    build: ./server
+    ports:
+      - '8000:3000'
+    volumes:
+      - ./server:/usr/src/app
+    command: npm run start:dev
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - mongodb
+  client:
+    restart: always
+    build: client
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./client:/usr/src/app
+    command: npm run start
+  mongodb:
+    restart: always
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: your_database_name
+volumes:
+  mongodb_data:

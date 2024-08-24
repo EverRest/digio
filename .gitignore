@@ -1,0 +1,12 @@
+*/node_modules
+*/.env
+*/.env*
+.idea/
+.vscode/
+./storage/*
+./*/*.log
+./reports/*
+*/*.log
+*/build
+*/dist
+*/storage/*
