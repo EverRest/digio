@@ -22,7 +22,7 @@ import {
 import { StyledButton } from "../../../ui/button/styled";
 import { ProfilePhotoContainer } from "../../users/list/styled";
 import { getRandomColor, truncateDescription } from "../../../utils/common";
-import Tags from "../../tags/Tags";
+import Tags from "../tags/Tags";
 
 const ProjectsList = (): ReactElement => {
     const navigate = useNavigate();
