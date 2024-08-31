@@ -10,7 +10,7 @@ import { SmallLightText, Wrapper } from "./styled";
 import { useTranslation } from "react-i18next";
 import { Stack } from "@mui/system";
 import { getAccount } from "../../../api/accounts";
-import Tags from "../../../components/tags/Tags";
+import Tags from "../../tags/Tags";
 import { getRandomColor } from "../../../utils/common";
 
 const AccountShow = (): ReactElement => {

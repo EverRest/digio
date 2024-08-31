@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Box, Typography, Button, MenuItem, Select, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
-import { getUsers } from '../../../api/users';
+import { getUsers } from '../../api/users';
 
 interface User {
     _id: string;

@@ -1,6 +1,6 @@
     import React, { useState, useEffect } from 'react';
     import { Modal, Box, Typography, Button, MenuItem, Select, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
-    import { getTags } from '../../../api/tags';
+    import { getTags } from '../../api/tags';
 
     interface Tag {
         _id: string;

@@ -22,7 +22,7 @@ import {
 } from "../../../ui/table/styled";
 import {StyledButton} from "../../../ui/button/styled";
 import {ProfilePhotoContainer} from "../../users/list/styled";
-import Tags from "../tags/Tags";
+import Tags from "../../tags/Tags";
 
 const WalletsList = (): ReactElement => {
     const navigate = useNavigate();

@@ -17,9 +17,9 @@ import {route} from "../../../utils/url";
 import {Search as SearchIcon} from "react-feather";
 import useIsMounted from "../../../hooks/useIsMounted";
 import React, {ReactElement, useCallback, useEffect, useState} from "react";
-import Tags from "../tags/Tags";
-import ShareModal from "../share/ShareModal";
-import TagModal from "../tags/TagModal";
+import Tags from "../../tags/Tags";
+import ShareModal from "../../share/ShareModal";
+import TagModal from "../../tags/TagModal";
 import {
     DeleteIcon,
     Input,
