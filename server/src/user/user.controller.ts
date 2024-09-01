@@ -18,11 +18,9 @@ import {JwtAuthGuard} from '../auth/auth.guard';
 import {FileInterceptor} from "@nestjs/platform-express";
 import {FileUploadService} from "../files/file-upload.service";
 import {Express} from "express";
-import {Multer} from "multer";
-import {IUser} from "./user.interface";
 import {join} from "path";
 
-@Controller('users')
+@Controller('api/users')
 export class UserController {
     constructor(
         private readonly userService: UserService,

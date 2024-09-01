@@ -8,7 +8,7 @@ import {
 import {NewsService} from './news.service';
 import {JwtAuthGuard} from "../auth/auth.guard";
 
-@Controller('news')
+@Controller('api/news')
 export class NewsController {
     constructor(
         private readonly newsService: NewsService,

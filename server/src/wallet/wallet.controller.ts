@@ -6,7 +6,7 @@ import {
     Get,
     Param, Patch,
     Post,
-    Put, Query,
+    Query,
     Request,
     UnprocessableEntityException,
     UploadedFile,
@@ -30,7 +30,7 @@ import {FileUploadService} from "../files/file-upload.service";
 import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
 
-@Controller('wallets')
+@Controller('api/wallets')
 export class WalletController {
     constructor(
         private readonly walletService: WalletService,

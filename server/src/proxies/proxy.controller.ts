@@ -26,10 +26,10 @@ import { FileUploadService } from "../files/file-upload.service";
 import { JwtService } from '@nestjs/jwt';
 import { ITag } from "../tag/tag.interface";
 import { Query } from '@nestjs/common';
-import { Project, ProxySchema } from "./proxy.schema";
+import { Project } from "./proxy.schema";
 import {IProject} from "./proxy.interface";
 
-@Controller('projects')
+@Controller('api/projects')
 export class ProxyController {
     constructor(
         @InjectModel(Project.name) private projectModel: Model<Project>,

@@ -6,7 +6,7 @@ import {
     Get,
     Param, Patch,
     Post,
-    Put, Query,
+    Query,
     Request,
     UnprocessableEntityException,
     UploadedFile,
@@ -29,7 +29,7 @@ import {FileUploadService} from "../files/file-upload.service";
 import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
 
-@Controller('accounts')
+@Controller('api/accounts')
 export class AccountController {
     constructor(
         @InjectModel(Account.name) private accountModel: Model<IAccount>,

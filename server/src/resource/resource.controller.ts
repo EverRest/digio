@@ -6,7 +6,6 @@ import {
     Get,
     Param, Patch,
     Post,
-    Put,
     Request,
     UnprocessableEntityException,
     UploadedFile,
@@ -29,7 +28,7 @@ import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
 import { Query } from '@nestjs/common';
 
-@Controller('resources')
+@Controller('api/resources')
 export class ResourceController {
     constructor(
         @InjectModel(Resource.name) private resourceModel: Model<Resource>,
