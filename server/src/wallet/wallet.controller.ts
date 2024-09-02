@@ -30,7 +30,7 @@ import {FileUploadService} from "../files/file-upload.service";
 import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
 
-@Controller('api/wallets')
+@Controller('wallets')
 export class WalletController {
     constructor(
         private readonly walletService: WalletService,

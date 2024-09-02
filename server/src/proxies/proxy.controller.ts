@@ -14,22 +14,22 @@ import {
     UsePipes,
     ValidationPipe
 } from '@nestjs/common';
-import { ProxiesService } from './proxies.service';
-import { CreateProxyDto } from './create-proxy.dto';
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
-import { EncryptionService } from "../crypto/encryption.service";
-import { TagService } from "../tag/tag.service";
-import { JwtAuthGuard } from "../auth/auth.guard";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { FileUploadService } from "../files/file-upload.service";
-import { JwtService } from '@nestjs/jwt';
-import { ITag } from "../tag/tag.interface";
-import { Query } from '@nestjs/common';
-import { Project } from "./proxy.schema";
+import {ProxiesService} from './proxies.service';
+import {CreateProxyDto} from './create-proxy.dto';
+import {InjectModel} from "@nestjs/mongoose";
+import {Model} from "mongoose";
+import {EncryptionService} from "../crypto/encryption.service";
+import {TagService} from "../tag/tag.service";
+import {JwtAuthGuard} from "../auth/auth.guard";
+import {FileInterceptor} from "@nestjs/platform-express";
+import {FileUploadService} from "../files/file-upload.service";
+import {JwtService} from '@nestjs/jwt';
+import {ITag} from "../tag/tag.interface";
+import {Query} from '@nestjs/common';
+import {Project} from "./proxy.schema";
 import {IProject} from "./proxy.interface";
 
-@Controller('api/projects')
+@Controller('projects')
 export class ProxyController {
     constructor(
         @InjectModel(Project.name) private projectModel: Model<Project>,
@@ -38,12 +38,13 @@ export class ProxyController {
         private readonly tagService: TagService,
         private readonly fileUploadService: FileUploadService,
         private jwtService: JwtService
-    ) {}
+    ) {
+    }
 
     @Post(':id/avatar')
     @UseGuards(JwtAuthGuard)
     @UseInterceptors(FileInterceptor('file', {
-        limits: { fileSize: 50 * 1024 * 1024 },  // 50MB
+        limits: {fileSize: 50 * 1024 * 1024},  // 50MB
         fileFilter: (req, file, callback) => {
             if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
                 return callback(new BadRequestException('Only image files are allowed!'), false);
@@ -55,7 +56,7 @@ export class ProxyController {
         try {
             const imageUrl = await this.fileUploadService.uploadTempFileAndMove(file, id);
             await this.projectService.updateProjectImage(id, imageUrl);
-            return { message: 'File uploaded successfully', path: imageUrl };
+            return {message: 'File uploaded successfully', path: imageUrl};
         } catch (error) {
             throw new BadRequestException(error.message);
         }
@@ -63,20 +64,20 @@ export class ProxyController {
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    @UsePipes(new ValidationPipe({ transform: true }))
+    @UsePipes(new ValidationPipe({transform: true}))
     async create(@Body() createProjectDto: CreateProxyDto, @Request() req: any) {
         const token = req.headers.authorization.split(' ')[1];
         const decoded: { id: string } = this.jwtService.decode(token) as { id: string };
         const userId: string = decoded.id;
         const encryptedCredentials: string = this.encryptionService.encryptData(JSON.stringify(createProjectDto.encryptedCredentials), userId);
-        const modifiedCreateProjectDto = { ...createProjectDto, encryptedCredentials, userId };
+        const modifiedCreateProjectDto = {...createProjectDto, encryptedCredentials, userId};
         const createdProject = new this.projectModel(modifiedCreateProjectDto);
         return createdProject.save();
     }
 
     @Get()
     @UseGuards(JwtAuthGuard)
-    @UsePipes(new ValidationPipe({ transform: true }))
+    @UsePipes(new ValidationPipe({transform: true}))
     async findAll(@Request() req: any, @Query('q') q?: string): Promise<any[]> {
         const token = req.headers.authorization.split(' ')[1];
         const decoded: { id: string } = this.jwtService.decode(token) as { id: string };
@@ -86,7 +87,7 @@ export class ProxyController {
 
     @Post(':id/tags/:tagId')
     @UseGuards(JwtAuthGuard)
-    @UsePipes(new ValidationPipe({ transform: true }))
+    @UsePipes(new ValidationPipe({transform: true}))
     async addTag(@Param('id') id: string, @Param('tagId') tagId: string, @Request() req: any) {
         const token = req.headers.authorization.split(' ')[1];
         const decoded: { id: string } = this.jwtService.decode(token) as { id: string };
@@ -121,7 +122,7 @@ export class ProxyController {
 
     @Get(':id')
     @UseGuards(JwtAuthGuard)
-    @UsePipes(new ValidationPipe({ transform: true }))
+    @UsePipes(new ValidationPipe({transform: true}))
     async decryptCredentials(@Param('id') id: string, @Request() req: any) {
         let project: IProject = await this.projectService.findOne(id);
         const token = req.headers.authorization.split(' ')[1];

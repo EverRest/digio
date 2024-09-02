@@ -29,7 +29,7 @@ import {FileUploadService} from "../files/file-upload.service";
 import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
 
-@Controller('api/accounts')
+@Controller('accounts')
 export class AccountController {
     constructor(
         @InjectModel(Account.name) private accountModel: Model<IAccount>,

@@ -26,9 +26,9 @@ import {FileInterceptor} from "@nestjs/platform-express";
 import {FileUploadService} from "../files/file-upload.service";
 import {JwtService} from '@nestjs/jwt';
 import {ITag} from "../tag/tag.interface";
-import { Query } from '@nestjs/common';
+import {Query} from '@nestjs/common';
 
-@Controller('api/resources')
+@Controller('resources')
 export class ResourceController {
     constructor(
         @InjectModel(Resource.name) private resourceModel: Model<Resource>,
@@ -76,7 +76,7 @@ export class ResourceController {
 
     @Patch(':resourceId/users/:userId')
     @UseGuards(JwtAuthGuard)
-    @UsePipes(new ValidationPipe({ transform: true }))
+    @UsePipes(new ValidationPipe({transform: true}))
     async shareResource(
         @Param('resourceId') resourceId: string,
         @Param('userId') userId: string,

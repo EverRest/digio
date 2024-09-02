@@ -3,7 +3,7 @@ import {TagService} from './tag.service';
 import {CreateTagDto, UpdateTagDto} from './tag.dto';
 import {JwtAuthGuard} from "../auth/auth.guard";
 
-@Controller('api/tags')
+@Controller('tags')
 export class TagController {
     constructor(private readonly tagService: TagService) {
     }

@@ -20,7 +20,7 @@ import {FileUploadService} from "../files/file-upload.service";
 import {Express} from "express";
 import {join} from "path";
 
-@Controller('api/users')
+@Controller('users')
 export class UserController {
     constructor(
         private readonly userService: UserService,

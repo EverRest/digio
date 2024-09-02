@@ -6,7 +6,7 @@ import { join } from 'path';
 import * as path from 'path';
 import { FileUploadService } from './file-upload.service';
 
-@Controller('api/files')
+@Controller('files')
 export class FileController {
     constructor(private readonly fileUploadService: FileUploadService) {}
 
