@@ -112,7 +112,7 @@ const UsersList = (): ReactElement => {
                                     bgcolor: randomColor,
                                     textTransform: "uppercase",
                                 }}
-                            >{`${row.username[0]}`}</Avatar>
+                            >{`${row.username}`}</Avatar>
                         </ProfilePhotoContainer>
                     ) : (
                         /* istanbul ignore next */ <ProfilePhotoContainer>
