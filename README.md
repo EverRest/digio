@@ -27,7 +27,7 @@ This project is an admin panel built with Nest.js and React for managing credent
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-repo/crypto-admin-panel.git
+git clone https://github.com/EverRest/digio/crypto-admin-panel.git
 cd crypto-admin-panel
 ```
 
